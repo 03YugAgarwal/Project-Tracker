@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
+import styles from "../css/Navbar.module.css"
+
 const Navbar = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState();
@@ -19,7 +21,7 @@ const Navbar = () => {
   };
 
   return (
-    <div>
+    <div className={styles.main}>
       <h1 onClick={() => navigate("/")}>Project Tracker</h1>
       <ul>
         {isLoggedIn && <li onClick={handleLogout}>Logout</li>}
