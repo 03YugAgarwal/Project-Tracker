@@ -1,50 +1,51 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+// import login from "../assets/login.svg";
+import styles from "../css/Login.module.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const [isloggedIn, setIsLoggedIn] = useState(false)
-  const navigate = useNavigate()
+  const [isloggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-        setIsLoggedIn(true)
-        navigate("/")
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+      navigate("/home");
     }
-}, [isloggedIn,navigate]);
+  }, [isloggedIn, navigate]);
 
   const handleSubmit = async () => {
-    const response = await fetch('http://localhost:5555/user/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
+    const response = await fetch("http://localhost:5555/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
     });
 
     if (response.status === 200) {
-        const data = await response.json();
-        localStorage.setItem('token', data);
-        window.location.reload();
+      const data = await response.json();
+      localStorage.setItem("token", data);
+      window.location.reload();
     } else {
-        const data = await response.json();
-        alert(data.message);
+      const data = await response.json();
+      alert(data.message);
     }
 
     console.log(username, password);
   };
 
   return (
-    <div>
-      <h1>Login Page</h1>
-      <table>
-        <tr>
-          <td>
+    <div className={styles.main}>
+      {/* <img src={login} alt="" /> */}
+      <div className={styles.container}>
+        <h1>User Login</h1>
+        <p>Enter your details to sign in to your account</p>
+          <div className={styles.form}>
             <label htmlFor="">Username</label>
-          </td>
-          <td>
             <input
               type="text"
               value={username}
@@ -52,14 +53,7 @@ const Login = () => {
                 setUsername(e.target.value);
               }}
             />
-          </td>
-        </tr>
-        <tr>
-          <td>
             <label htmlFor="">Password</label>
-          </td>
-          <td>
-            {/* <input type="text" /> */}
             <input
               type="password"
               value={password}
@@ -67,14 +61,12 @@ const Login = () => {
                 setPassword(e.target.value);
               }}
             />
-          </td>
-        </tr>
-        <tr>
-          <td rowSpan={2}>
-            <button onClick={handleSubmit} disabled={isloggedIn}>Submit</button>
-          </td>
-        </tr>
-      </table>
+            <button onClick={handleSubmit} disabled={isloggedIn}>
+              Submit
+            </button>
+            <p>New? Try Signing in: <Link to="/signup">Here</Link> </p>
+          </div>
+      </div>
     </div>
   );
 };
