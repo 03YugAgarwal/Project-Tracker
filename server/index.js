@@ -23,6 +23,9 @@ app.use(bodyParser.json());
 const UserRoute = require("./routes/UserRoute");
 app.use("/user", UserRoute);
 
+const TaskRoute = require("./routes/TaskRoute");
+app.use("/task", TaskRoute);
+
 app.listen(process.env.PORT, () => {
   connectDB();
   console.log(`Server is running on ${process.env.IP}:${process.env.PORT}`);
