@@ -11,6 +11,18 @@ const createTask = async (req,res) => {
     }
 }
 
+const getTaskByUserId = async (req,res) => {
+    try{
+        const task = await Task.find({by: req.params.id});
+        res.status(200).json(task);
+
+    }catch(error){
+        console.log(error.message)
+        res.status(500).json({message: "Intenal Server Error"})
+    }
+
+}
+
 const getTask = async (req,res) => {
     try{
         const task = await Task.find();
@@ -33,4 +45,29 @@ const getTaskById = async (req,res) => {
     }
 }
 
-module.exports = {createTask, getTask, getTaskById}
+
+const updateTask = async (req,res) => {
+    try{
+        const task = await Task.findByIdAndUpdate(req.params.id , req.body);
+        res.status(200).json(task);
+    }
+    catch(error){
+        console.log(error.message)
+        res.status(500).json({message: "Intenal Server Error"})
+    }
+}
+
+const completeTask = async (req,res) => {
+    try{
+        const task = await Task.findByIdAndUpdate(req.params.id , {completed: true});
+        res.status(200).json(task);
+    }
+    catch(error){
+        console.log(error.message)
+        res.status(500).json({message: "Intenal Server Error"})
+    }
+
+}
+
+
+module.exports = {createTask, getTask, getTaskById, getTaskByUserId, updateTask, completeTask}
