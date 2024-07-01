@@ -1,0 +1,185 @@
+/* styles.css */
+
+.App {
+  text-align: center;
+  margin: 20px;
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center content horizontally */
+  align-items: flex-start; /* Align items to the top */
+}
+
+.leftitems {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px; /* Adjust margin as needed */
+  width: 300px; /* Set a fixed width for the left items */
+  background: #caf4ff;
+  border-radius: 10px;
+}
+
+.rightitems {
+  display: flex;
+  flex-grow: 1; /* Allow the right items to grow to fill available space */
+}
+
+.submitbutton {
+  background-color: blue;
+  color: white;
+  border-color: transparent;
+  border-radius: 5px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.lists-container {
+  display: inline-flex;
+  justify-content: space-around;
+}
+
+.newGoal {
+  text-align: center;
+  padding-top: 25px;
+}
+
+.progress-circle-container {
+  margin-top: 20px; /* Adjust margin as needed */
+}
+
+.goal-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 3rem;
+  border-radius: 5px;
+  min-width: 200px;
+  text-align: center; /* Adjust alignment as needed */
+  min-height: 350px;
+}
+
+.goal-item {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-left: 10px solid;
+  border-top: solid whitesmoke;
+  border-bottom: solid whitesmoke;
+  border-right: solid #ccc;
+  max-width: 190px;
+}
+
+.goal-item h3 {
+  margin: 0;
+}
+
+.goal-item p {
+  margin: 0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.button-container button {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-container button:first-child {
+  background-color: #f0ad4e;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.button-container button:last-child {
+  background-color: #5cb85c;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.button-container button:hover {
+  opacity: 0.8;
+}
+
+.goal-list h2 {
+  margin-top: 0px;
+}
+
+.todo h2 {
+  background-color: yellow;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.inprog h2 {
+  background-color: orange;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.comp h2 {
+  background-color: #5cb85c;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.goal-item:hover {
+  background-color: #595de5;
+  color: whitesmoke;
+  border-left-color: whitesmoke;
+  transition: background-color 0.3s, color 0.3s, border-left-color 0.3s;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: teal;
+  border-bottom: 1px solid #ccc;
+  border-radius: 15px;
+  max-width: 1300px;
+}
+
+.header-left h1 {
+  margin: 0;
+  margin-left: 10px;
+  color: #91ddcf;
+}
+
+.header-right button {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #91ddcf;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.header-right button:hover {
+  background-color: white;
+  color: #91ddcf;
+}
+.newGoal select {
+  background-color: blue; /* Background color of the dropdown */
+  color: white; /* Text color of the dropdown */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  text-align: center;
+}
+
+.newGoal option {
+  background-color: white; /* Background color of options */
+  color: black; /* Text color of options */
+}
