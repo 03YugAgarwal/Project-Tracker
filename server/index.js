@@ -26,6 +26,9 @@ app.use("/user", UserRoute);
 const TaskRoute = require("./routes/TaskRoute");
 app.use("/task", TaskRoute);
 
+const ProjectRoute = require("./routes/ProjectRoute");
+app.use("/project", ProjectRoute);
+
 app.listen(process.env.PORT, () => {
   connectDB();
   console.log(`Server is running on ${process.env.IP}:${process.env.PORT}`);

@@ -13,7 +13,7 @@ const Login = () => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setIsLoggedIn(true);
-      navigate("/home");
+      navigate("/");
     }
   }, [isloggedIn, navigate]);
 
@@ -46,6 +46,9 @@ const Login = () => {
       const data = await response.json();
       localStorage.setItem("token", data);
       window.location.reload();
+
+
+
     } else {
       const data = await response.json();
       alert(data.message);

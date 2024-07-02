@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Circle from "./components/Circle";
 import NewGoal from "./components/NewGoal";
 import TodoList from "./components/TodoList";
@@ -6,10 +6,29 @@ import InProgressList from "./components/InProgressList";
 import CompletedList from "./components/CompletedList";
 import Header from "./components/Header";
 
-export default function App() {
+import { useParams } from "react-router-dom";
+
+export default function ProjectTracker() {
   const [todoTasks, setTodoTasks] = useState([]);
   const [inProgressTasks, setInProgressTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
+
+
+  const{pid} = useParams();
+  console.log(pid)
+
+  useEffect(() => {
+
+    if(localStorage.getItem("project") !== pid){
+      // localStorage.setItem("project", pid)
+      alert("You are not authorized to view this project")
+      window.location.href = "/"
+    }
+
+  },[])
+
+
+  // console.log();
 
   const addTask = (newTask, status) => {
     newTask.id = Math.random().toString();

@@ -17,17 +17,28 @@ const Generator = () => {
 
   const handleSave = async () => {
     if (projectName && projectId && projectPassword) {
-      try {
-        await axios.post('http://your-backend-url.com/projects', {
-          name: projectName,
-          id: projectId,
-          password: projectPassword
-        });
-        alert('Project saved successfully!');
-      } catch (error) {
-        console.error('Error saving project:', error);
-        alert('Failed to save project.');
-      }
+      // try {
+      //   await axios.post('http://your-backend-url.com/projects', {
+      //     name: projectName,
+      //     id: projectId,
+      //     password: projectPassword
+      //   });
+      //   alert('Project saved successfully!');
+      // } catch (error) {
+      //   console.error('Error saving project:', error);
+      //   alert('Failed to save project.');
+      // }
+
+      
+      const response = await fetch("http://localhost:5555/project/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name:projectName, id:projectId,password:projectPassword }),
+      });
+      const data = await response.json();
+      console.log(data);
     } else {
       alert('Please generate project ID and password first.');
     }

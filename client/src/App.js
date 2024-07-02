@@ -7,6 +7,7 @@ import Signup from './components/Signup';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 import Home from './components/Home';
+import ProjectTracker from './ui/src/ProjectTracker';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/task/:pid" element={<ProjectTracker />} />
         </Routes>
       </Router>
     </div>
