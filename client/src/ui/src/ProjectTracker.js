@@ -14,90 +14,117 @@ export default function ProjectTracker() {
   const [inProgressTasks, setInProgressTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
 
-
-  const{pid} = useParams();
-  console.log(pid)
+  const { pid } = useParams();
+  // console.log(pid);
 
   useEffect(() => {
-
-    if(localStorage.getItem("project") !== pid){
+    if (localStorage.getItem("project") !== pid) {
       // localStorage.setItem("project", pid)
-      alert("You are not authorized to view this project")
-      window.location.href = "/"
+      alert("You are not authorized to view this project");
+      window.location.href = "/";
     }
 
-  },[])
+    fetch("http://localhost:5555/project/get/" + pid, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data?.project?.toDo);
 
+        setTodoTasks(data.project.toDo);
+        setInProgressTasks(data.project.inProgress);
+        setCompletedTasks(data.project.completed);
+      });
+  }, [pid]);
 
   // console.log();
 
-  const addTask = (newTask, status) => {
-    newTask.id = Math.random().toString();
-    switch (status) {
-      case "todo":
-        setTodoTasks([...todoTasks, newTask]);
-        break;
-      case "inProgress":
-        setInProgressTasks([...inProgressTasks, newTask]);
-        break;
-      case "completed":
-        setCompletedTasks([...completedTasks, newTask]);
-        break;
-      default:
-        break;
+  const addTask = async (newTask, status) => {
+    let id = Math.random().toString();
+    const response = await fetch("http://localhost:5555/project/add/" + pid, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: status,
+        text: newTask.text,
+        body: newTask.body,
+        id,
+      }),
+    });
+
+    if (response.status === 200) {
+      const data = await response.json();
+      if (status === "todo") {
+        setTodoTasks(data.project.toDo);
+      } else if (status === "inProgress") {
+        setInProgressTasks(data.project.inProgress);
+      } else if (status === "completed") {
+        setCompletedTasks(data.project.completed);
+      }
+    } else {
+      const data = await response.json();
+      alert(data.message);
     }
   };
 
-  const moveTask = (taskId, sourceStatus, targetStatus) => {
-    let taskToMove;
-    switch (sourceStatus) {
-      case "todo":
-        taskToMove = todoTasks.find((task) => task.id === taskId);
-        setTodoTasks(todoTasks.filter((task) => task.id !== taskId));
-        break;
-      case "inProgress":
-        taskToMove = inProgressTasks.find((task) => task.id === taskId);
-        setInProgressTasks(
-          inProgressTasks.filter((task) => task.id !== taskId)
-        );
-        break;
-      case "completed":
-        taskToMove = completedTasks.find((task) => task.id === taskId);
-        setCompletedTasks(completedTasks.filter((task) => task.id !== taskId));
-        break;
-      default:
-        break;
+  const moveTask = async (taskId, sourceStatus, targetStatus) => {
+    // "source: todo" -> "target: completed"
+    // "target: add" -> "source: delete"
+
+    const response = await fetch("http://localhost:5555/project/move/" + pid, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: taskId,
+        source: sourceStatus,
+        target: targetStatus,
+      }),
+    });
+
+    if (response.status !== 200) {
+      alert("Task not moved");
     }
-    switch (targetStatus) {
-      case "todo":
-        setTodoTasks([...todoTasks, taskToMove]);
-        break;
-      case "inProgress":
-        setInProgressTasks([...inProgressTasks, taskToMove]);
-        break;
-      case "completed":
-        setCompletedTasks([...completedTasks, taskToMove]);
-        break;
-      default:
-        break;
+    if (response.status === 200) {
+      window.location.reload()
     }
+    
+    
   };
 
-  const deleteTask = (taskId, sourceStatus) => {
-    switch (sourceStatus) {
-      case "todo":
-        setTodoTasks(todoTasks.filter((task) => task.id !== taskId));
-        break;
-      case "inProgress":
-        setInProgressTasks(
-          inProgressTasks.filter((task) => task.id !== taskId)
-        );
-        break;
-      case "completed":
-        setCompletedTasks(completedTasks.filter((task) => task.id !== taskId));
-        break;
-      default:
-        break;
+  const deleteTask = async (taskId, sourceStatus) => {
+    const response = await fetch(
+      "http://localhost:5555/project/delete/" + pid,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ type: sourceStatus, id: taskId }),
+      }
+    );
+
+    if (response.status !== 200) {
+      alert("Task not deleted");
+    }
+    if (response.status === 200) {
+      const data = await response.json();
+
+      if (sourceStatus === "todo") {
+        setTodoTasks(data.project.toDo);
+      } else if (sourceStatus === "inProgress") {
+        setInProgressTasks(data.project.inProgress);
+      } else {
+        setCompletedTasks(data.project.completed);
+      }
+
+      // console.log(data);
     }
   };
 
@@ -107,39 +134,29 @@ export default function ProjectTracker() {
     ? Math.round((completedTasks.length / totalTasks) * 100)
     : 0;
 
-  const handleHomeClick = () => {
-    console.log("Home Page clicked");
-  };
-
-  const handleChangeProjectClick = () => {
-    console.log("Change Project clicked");
-  };
-
-  const handleLogoutClick = () => {
-    console.log("Logout clicked");
-  };
-
   return (
     <div>
-     
-
-      <div className={styles.App} style={{marginTop: "30px",display: "flex"}}>
+      <div
+        className={styles.App}
+        style={{ marginTop: "30px", display: "flex" }}
+      >
         <div className={styles["leftitems"]}>
-          <h1 style={{ color : "white"}}>
-            Task Manager
-          </h1>
+          <h1 style={{ color: "white" }}>Task Manager</h1>
           <NewGoal onAdd={addTask} />
           <div className={styles["progress-circle-container"]}>
             <Circle percentage={completedPercentage} />
             <div className={styles["stats"]}>
-              <p style={{color:"white"}}>
+              <p style={{ color: "white" }}>
                 {completedTasks.length} of {totalTasks} completed successfully
               </p>
             </div>
           </div>
         </div>
         <div className={styles["rightitems"]}>
-          <div style={{ display: "inline-flex" }} className={styles["lists-container"]}>
+          <div
+            style={{ display: "inline-flex" }}
+            className={styles["lists-container"]}
+          >
             <TodoList
               tasks={todoTasks}
               onMove={moveTask}
