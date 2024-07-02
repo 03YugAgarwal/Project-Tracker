@@ -27,4 +27,20 @@ const getProject = async (req,res) => {
     }
 }
 
-module.exports = {createProject, getProject}
+const getProjectName = async (req,res) => {
+    try{
+        const {id} = req.body;
+        const project = await Project.findOne({projectID: id})
+        if(project){
+            res.status(200).json({name: project.name})
+        }
+        else{
+            res.status(400).json({message: "Project not found"})
+        }
+    }catch(error){
+        console.log(error.message)
+        res.status(500).json({message: "Intenal Server Error"})
+    }
+}
+
+module.exports = {createProject, getProject, getProjectName}

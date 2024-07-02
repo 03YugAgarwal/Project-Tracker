@@ -20,10 +20,34 @@ const Signup = () => {
     event.preventDefault();
   }
 
-
   const navigate = useNavigate();
 
+  const validateCredentials = (username, password) => {
+    if (username.length < 3) {
+      return "Username must be at least 3 characters long";
+    }
+    if (!password) {
+      return "Password cannot be empty";
+    }
+    if (password.length < 8 || password.length > 16) {
+      return "Password must be between 8 and 16 characters long";
+    }
+    if (!/[A-Z]/.test(password)) {
+      return "Password must contain at least one uppercase letter";
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      return "Password must contain at least one special character";
+    }
+    return null;
+  };
+
   const handleSignup = async () => {
+    const errorMessage = validateCredentials(username, password);
+    if (errorMessage) {
+      alert(errorMessage);
+      return;
+    }
+
     const response = await fetch("http://localhost:5555/user/create", {
       method: "POST",
       headers: {

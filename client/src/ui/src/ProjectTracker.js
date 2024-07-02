@@ -123,7 +123,7 @@ export default function ProjectTracker() {
     <div>
      
 
-      <div className="App" style={{marginTop: "30px",display: "flex"}}>
+      <div className={styles.App} style={{marginTop: "30px",display: "flex"}}>
         <div className={styles["leftitems"]}>
           <h1 style={{ color : "white"}}>
             Task Manager

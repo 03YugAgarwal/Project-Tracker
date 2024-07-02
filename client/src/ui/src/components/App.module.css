@@ -10,15 +10,18 @@ body{
   text-align: center;
   margin: 20px;
   display: flex; /* Use flexbox for layout */
-  justify-content: center; /* Center content horizontally */
-  align-items: flex-start; /* Align items to the top */
+  flex-direction: row;
+  justify-content: space-between;
+  /* align-items: center; */
+  flex-wrap: wrap;
 }
 
 .leftitems {
   display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 10vw;
+    /* margin-right: auto; */
     width: 350px;
     background: #55AD9B;
     border-radius: 10px;
@@ -29,6 +32,7 @@ body{
 .rightitems {
   display: flex;
   flex-grow: 1; /* Allow the right items to grow to fill available space */
+  /* flex-wrap: wrap; */
 }
 
 .submitbutton {
@@ -46,6 +50,7 @@ h1 {
 .lists-container {
   display: inline-flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .newGoal {
@@ -64,7 +69,7 @@ h1 {
   border-radius: 5px;
   min-width: 200px;
   text-align: center; /* Adjust alignment as needed */
-  min-height: 350px;
+  /* min-height: 350px; */
 }
 
 .goal-item {
