@@ -1,5 +1,11 @@
 /* styles.css */
 
+body{
+  background-color: #F1F8E8;
+  border-color:transparent;
+}
+
+
 .App {
   text-align: center;
   margin: 20px;
@@ -14,7 +20,7 @@
   align-items: center;
   margin-right: 20px; /* Adjust margin as needed */
   width: 300px; /* Set a fixed width for the left items */
-  background: #caf4ff;
+  background: #55AD9B;
   border-radius: 10px;
 }
 
@@ -60,7 +66,7 @@ h1 {
 }
 
 .goal-item {
-  background-color: whitesmoke;
+  background-color: #95D2B3;
   border-radius: 10px;
   margin: 1rem 0;
   padding: 1rem;
@@ -73,10 +79,14 @@ h1 {
 
 .goal-item h3 {
   margin: 0;
+  margin-bottom: 10px;
+  text-decoration: underline;
 }
 
 .goal-item p {
   margin: 0;
+  text-align: justify;
+  margin-bottom: 5px;
 }
 
 .button-container {
@@ -112,26 +122,29 @@ h1 {
 }
 
 .todo h2 {
-  background-color: yellow;
+  background-color: #55AD9B;
   border-radius: 5px;
   padding: 10px;
+  color : white;
 }
 
 .inprog h2 {
-  background-color: orange;
+  background-color: #55AD9B;
   border-radius: 5px;
   padding: 10px;
+  color : white;
 }
 
 .comp h2 {
-  background-color: #5cb85c;
+  background-color: #55AD9B;
   border-radius: 5px;
   padding: 10px;
+  color : white;
 }
 
 .goal-item:hover {
-  background-color: #595de5;
-  color: whitesmoke;
+  background-color: white;
+  color: #55AD9B;
   border-left-color: whitesmoke;
   transition: background-color 0.3s, color 0.3s, border-left-color 0.3s;
 }
@@ -141,7 +154,7 @@ h1 {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: teal;
+  background-color: #55AD9B;
   border-bottom: 1px solid #ccc;
   border-radius: 15px;
   max-width: 1300px;
@@ -150,13 +163,13 @@ h1 {
 .header-left h1 {
   margin: 0;
   margin-left: 10px;
-  color: #91ddcf;
+  color: white;
 }
 
 .header-right button {
   margin-left: 1rem;
   padding: 0.5rem 1rem;
-  background-color: #91ddcf;
+  background-color: #95D2B3;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -166,10 +179,10 @@ h1 {
 
 .header-right button:hover {
   background-color: white;
-  color: #91ddcf;
+  color: #95D2B3;
 }
 .newGoal select {
-  background-color: blue; /* Background color of the dropdown */
+  background-color: #95D2B3; /* Background color of the dropdown */
   color: white; /* Text color of the dropdown */
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -177,6 +190,11 @@ h1 {
   -moz-appearance: none;
   -webkit-appearance: none;
   text-align: center;
+}
+
+.newgoal select:hover{
+  background-color: white;
+  color : blue;
 }
 
 .newGoal option {

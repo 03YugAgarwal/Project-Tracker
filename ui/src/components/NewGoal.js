@@ -67,7 +67,7 @@ const NewGoal = ({ onAdd }) => {
       </div>
       <button
         className="submitbutton"
-        style={{ backgroundColor: isHovered ? "white" : "blue" }}
+        style={{ backgroundColor: isHovered ? "white" : "#95D2B3" }}
         type="submit"
         onMouseOver={handleMouseEnter}
         onMouseOut={handleMouseLeave}

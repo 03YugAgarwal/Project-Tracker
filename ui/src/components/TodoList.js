@@ -43,7 +43,7 @@ const TodoList = ({ tasks, onMove, onDelete }) => {
         <div
           key={task.id}
           className="goal-item"
-          style={{ borderLeftColor: "yellow", position: "relative" }}
+          style={{ borderLeftColor: colors[task.id], position: "relative" }}
         >
           <button
             onClick={() => deleteTaskHandler(task.id)}

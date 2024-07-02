@@ -7,6 +7,20 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+  const [name, setName] = useState("");
+  const [headingText, setHeading] = useState("");
+  
+  function handleChange(event) {
+    console.log(event.target.value);
+    setName(event.target.value);
+    setHeading(name);
+  }
+
+  function handleClick(event) {
+    event.preventDefault();
+  }
+
+
   const navigate = useNavigate();
 
   const handleSignup = async () => {
@@ -30,11 +44,14 @@ const Signup = () => {
   return (
     <div className={styles.main}>
       <div className={styles.container}>
-        <h1>Hello, Please Signin:</h1>
+        <h1>Hello {headingText}</h1>
         <p>Enter your details to create a new account</p>
         <div className={styles.form}>
           <label htmlFor="">Email</label>
           <input
+            style={{
+              background: "white"
+          }}
             type="email"
             value={email}
             onChange={(e) => {
@@ -47,6 +64,7 @@ const Signup = () => {
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
+              handleChange(e);
             }}
           />
           <label htmlFor="">Password</label>

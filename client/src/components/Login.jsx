@@ -17,6 +17,22 @@ const Login = () => {
     }
   }, [isloggedIn, navigate]);
 
+  const [contact, setContact] = useState({
+    fName: "",
+    lName: "",
+    email: ""
+  });
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setContact(prevValue => {
+      return {
+        ...prevValue,
+        [name]: value
+      };
+    });
+  }
+
   const handleSubmit = async () => {
     const response = await fetch("http://localhost:5555/user/login", {
       method: "POST",
@@ -51,6 +67,7 @@ const Login = () => {
               value={username}
               onChange={(e) => {
                 setUsername(e.target.value);
+                handleChange(e);
               }}
             />
             <label htmlFor="">Password</label>

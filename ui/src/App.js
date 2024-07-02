@@ -109,14 +109,14 @@ export default function App() {
 
       <div className="App">
         <div className="leftitems">
-          <h1 style={{ marginTop: "0px", marginBottom: "0px" }}>
+          <h1 style={{ marginBottom: "0px" , color : "white"}}>
             Task Manager
           </h1>
           <NewGoal onAdd={addTask} />
           <div className="progress-circle-container">
             <Circle percentage={completedPercentage} />
             <div className="stats">
-              <p>
+              <p style={{color:"white"}}>
                 {completedTasks.length} of {totalTasks} completed successfully
               </p>
             </div>

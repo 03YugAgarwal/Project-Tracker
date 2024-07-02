@@ -22,20 +22,18 @@ const Navbar = () => {
 
   return (
     <div className={styles.main}>
+      <div>
       <h1 onClick={() => navigate("/")}>Project Tracker</h1>
-      <ul>
+      </div>
         {isLoggedIn && <li onClick={handleLogout}>Logout</li>}
+      <div>
         {!isLoggedIn && (
-          <li>
             <NavLink to="/login">Login</NavLink>
-          </li>
         )}
         {!isLoggedIn && (
-          <li>
             <NavLink to="/signup">Signup</NavLink>
-          </li>
         )}
-      </ul>
+      </div>
     </div>
   );
 };
