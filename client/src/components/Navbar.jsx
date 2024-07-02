@@ -21,12 +21,12 @@ const Navbar = () => {
   };
 
   return (
-    <div className={styles.main}>
-      <div>
-      <h1 onClick={() => navigate("/")}>Project Tracker</h1>
+    <div className={styles.header}>
+      <div className={styles.headerleft}>
+      <h1  onClick={() => navigate("/")}>Project Tracker</h1>
       </div>
-        {isLoggedIn && <li onClick={handleLogout}>Logout</li>}
-      <div>
+      <div className={styles.headerright}>
+        {isLoggedIn && <button  onClick={handleLogout}>Logout</button>}
         {!isLoggedIn && (
             <NavLink to="/login">Login</NavLink>
         )}

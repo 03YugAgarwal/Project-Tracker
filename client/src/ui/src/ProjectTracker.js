@@ -5,6 +5,7 @@ import TodoList from "./components/TodoList";
 import InProgressList from "./components/InProgressList";
 import CompletedList from "./components/CompletedList";
 import Header from "./components/Header";
+import styles from "./components/App.module.css";
 
 import { useParams } from "react-router-dom";
 
@@ -120,29 +121,25 @@ export default function ProjectTracker() {
 
   return (
     <div>
-      <Header
-        onHomeClick={handleHomeClick}
-        onChangeProjectClick={handleChangeProjectClick}
-        onLogoutClick={handleLogoutClick}
-      />
+     
 
-      <div className="App">
-        <div className="leftitems">
-          <h1 style={{ marginBottom: "0px" , color : "white"}}>
+      <div className="App" style={{marginTop: "30px",display: "flex"}}>
+        <div className={styles["leftitems"]}>
+          <h1 style={{ color : "white"}}>
             Task Manager
           </h1>
           <NewGoal onAdd={addTask} />
-          <div className="progress-circle-container">
+          <div className={styles["progress-circle-container"]}>
             <Circle percentage={completedPercentage} />
-            <div className="stats">
+            <div className={styles["stats"]}>
               <p style={{color:"white"}}>
                 {completedTasks.length} of {totalTasks} completed successfully
               </p>
             </div>
           </div>
         </div>
-        <div className="rightitems">
-          <div style={{ display: "inline-flex" }} className="lists-container">
+        <div className={styles["rightitems"]}>
+          <div style={{ display: "inline-flex" }} className={styles["lists-container"]}>
             <TodoList
               tasks={todoTasks}
               onMove={moveTask}

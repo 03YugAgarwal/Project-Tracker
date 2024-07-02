@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./NewGoal.css"; // Ensure your CSS file path is correct
+import styles from "./NewGoal.module.css"; // Ensure your CSS file path is correct
 
 const NewGoal = ({ onAdd }) => {
   const [enteredText, setEnteredText] = useState("");
@@ -38,16 +38,16 @@ const NewGoal = ({ onAdd }) => {
   };
 
   return (
-    <form className="newGoal" onSubmit={submitHandler}>
+    <form className={styles.newGoal} onSubmit={submitHandler}>
       <input
-        className="taskname"
+        className={styles.taskname}
         type="text"
         value={enteredText}
         onChange={textChangeHandler}
         placeholder="Enter Task Name ..."
       />
       <input
-        className="taskname"
+        className={styles.taskname}
         type="text"
         value={enteredDescription}
         onChange={descriptionChangeHandler}
@@ -55,7 +55,7 @@ const NewGoal = ({ onAdd }) => {
       />
       <div>
         <select
-          className="taskselect"
+          className={styles.taskselect}
           id="status"
           value={selectedStatus}
           onChange={statusChangeHandler}
@@ -66,7 +66,7 @@ const NewGoal = ({ onAdd }) => {
         </select>
       </div>
       <button
-        className="submitbutton"
+        className={styles.submitbutton}
         style={{ backgroundColor: isHovered ? "white" : "#95D2B3" }}
         type="submit"
         onMouseOver={handleMouseEnter}

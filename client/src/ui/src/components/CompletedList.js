@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "./App.module.css";
 
 const CompletedList = ({ tasks, onMove, onDelete }) => {
   const [colors, setColors] = useState({});
@@ -35,12 +36,12 @@ const CompletedList = ({ tasks, onMove, onDelete }) => {
   };
 
   return (
-    <div className="goal-list comp">
-      <h2>Completed</h2>
+    <div className={`${styles["goal-list"]} ${styles["comp"]}`}>
+      <h2 style={{borderTop: "teal 10px solid"}}>Completed</h2>
       {tasks.map((task) => (
         <div
           key={task.id}
-          className="goal-item"
+          className={styles["goal-item"]}
           style={{ borderLeftColor: colors[task.id], position: "relative" }}
         >
           <button
@@ -61,13 +62,14 @@ const CompletedList = ({ tasks, onMove, onDelete }) => {
           <h3
             onClick={() => clickCheck(task.id)}
             style={{
-              textDecoration: clickedGoals[task.id] ? "line-through" : "none",
+              textAlignLast: "left",
             }}
           >
             {task.text}
           </h3>
           <p>{task.body}</p>
-          <div className="button-container">
+          <div className={styles["button-container"]}
+          >
             <button
               style={{ backgroundColor: "yellow" }}
               onClick={() => moveTaskHandler(task.id, "todo")}
